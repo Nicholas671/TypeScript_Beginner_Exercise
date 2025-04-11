@@ -1,0 +1,2 @@
+*.js     # Ignore all compiled JavaScript files
+*.js.map # Ignore map files (in case they are generated later)
