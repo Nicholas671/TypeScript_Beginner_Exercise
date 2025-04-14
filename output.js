@@ -34,6 +34,9 @@ class TaskManager {
         };
         return [...this.tasks].sort((a, b) => (priorityOrder[a.priority || TaskPriority.Medium] - priorityOrder[b.priority || TaskPriority.Medium]));
     }
+    searchTasks(query) {
+        return this.tasks.filter(task => task.description.toLowerCase().includes(query.toLowerCase()));
+    }
     displayAllTasks() {
         this.tasks.forEach(task => {
             console.log(`ID: ${task.id}, Description: ${task.description}, Priority: ${task.priority}, Status: ${task.status}, Created At: ${task.createdAt}`);
@@ -111,7 +114,6 @@ taskManager.addTask("Build a to-do list application");
 taskManager.addTask("Fix bugs", TaskPriority.High);
 taskManager.addTask("Write documentation", TaskPriority.Medium);
 taskManager.addTask("Clean workspace", TaskPriority.Low);
-taskManager.displayAllTasks();
 // Marking tasks
 taskManager.markTaskAsCompleted(1);
 const sortedTasks = taskManager.sortTasksByPriority();
@@ -120,3 +122,8 @@ console.log("Sorted tasks by priority:", sortedTasks);
 console.log("All tasks:", taskManager.displayAllTasks());
 console.log("Completed tasks:", taskManager.displayCompletedTasks());
 console.log("Not completed tasks:", taskManager.displayNotCompletedTasks());
+// Searching tasks
+console.log("Search for 'learn':", taskManager.searchTasks("learn")); // Should return the task with "Learn TypeScript"
+console.log("Search for 'build':", taskManager.searchTasks("build")); // Should return the task with "Build a to-do list application"
+console.log("Search for 'fix':", taskManager.searchTasks("fix")); // Should return the task with "Fix bugs"
+console.log("Search for 'nonexistent':", taskManager.searchTasks("nonexistent")); // Should return an empty array

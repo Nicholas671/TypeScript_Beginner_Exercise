@@ -47,6 +47,9 @@ sortTasksByPriority(): Task[] {
     );
 }
 
+searchTasks(query: string): Task[] {
+    return this.tasks.filter(task=> task.description.toLowerCase().includes(query.toLowerCase()));
+}
     displayAllTasks(): void {
         this.tasks.forEach(task => {
             console.log(
@@ -149,3 +152,10 @@ console.log("Sorted tasks by priority:", sortedTasks);
 console.log("All tasks:", taskManager.displayAllTasks());
 console.log("Completed tasks:", taskManager.displayCompletedTasks());
 console.log("Not completed tasks:", taskManager.displayNotCompletedTasks());
+
+
+// Searching tasks
+console.log("Search for 'learn':", taskManager.searchTasks("learn")); // Should return the task with "Learn TypeScript"
+console.log("Search for 'build':", taskManager.searchTasks("build")); // Should return the task with "Build a to-do list application"
+console.log("Search for 'fix':", taskManager.searchTasks("fix")); // Should return the task with "Fix bugs"
+console.log("Search for 'nonexistent':", taskManager.searchTasks("nonexistent")); // Should return an empty array
